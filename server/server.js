@@ -5,7 +5,7 @@ const path = require('path');
 // uncomment the below for proxy challenge
 
 const leaderList = [
-  {name: 'Anna', id: 'a0'},
+  {name: 'A', id: 'a0'},
   {name: 'Ben', id: 'b0'},
   {name: 'Clara', id: 'c0'},
   {name: 'David', id: 'd0'},
