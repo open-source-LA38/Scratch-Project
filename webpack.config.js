@@ -6,7 +6,8 @@ module.exports = {
   entry: './client/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'build')
+    path: path.resolve(__dirname, 'build'),
+    publicPath: '/'
   },
 module: {
   rules: [
@@ -31,6 +32,7 @@ module: {
      extensions: [".js", ".jsx"],
  },
  devServer: {
+    historyApiFallback: true,
     contentBase: path.resolve(__dirname, "./client"),
     port: 8080,
     proxy: {
@@ -38,5 +40,4 @@ module: {
     },
     publicPath: "/build/"
  }
-
 }
