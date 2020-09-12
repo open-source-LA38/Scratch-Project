@@ -1,0 +1,33 @@
+{
+  "name": "Scratch-Project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "NODE_ENV=development",
+    "build": "NODE_ENV=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoonyoungKim025/Scratch-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoonyoungKim025/Scratch-Project/issues"
+  },
+  "homepage": "https://github.com/JoonyoungKim025/Scratch-Project#readme",
+  "dependencies": {
+    "nodemon": "^2.0.4",
+    "webpack": "^4.44.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
