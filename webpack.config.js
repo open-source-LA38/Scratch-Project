@@ -1,5 +1,5 @@
 module.exports = {
-  mode: 'process.env.NODE_ENV', 
+  mode: 'development', 
   entry: './client/index.js',
   output: {
     filename: 'bundle.js',
@@ -22,18 +22,6 @@ module: {
       use: ['style-loader', 'css-loader']
     }
   ]
-}
-
-
-
-
-
-
-
-
-
-
-
-
+ }
 
 }

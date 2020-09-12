@@ -5,8 +5,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "NODE_ENV=development",
-    "build": "NODE_ENV=production"
+    "build": "cross-env NODE_ENV=production webpack",
+    "dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open\" \"nodemon ./server/server.js\""
   },
   "repository": {
     "type": "git",
@@ -20,14 +20,25 @@
   },
   "homepage": "https://github.com/JoonyoungKim025/Scratch-Project#readme",
   "dependencies": {
-    "nodemon": "^2.0.4",
-    "webpack": "^4.44.1"
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "pg": "^8.3.3",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.3.0",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
+    "concurrently": "^5.3.0",
+    "cross-env": "^7.0.2",
+    "nodemon": "^2.0.4",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   }
 }
