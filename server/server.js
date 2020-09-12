@@ -44,7 +44,7 @@ const defaultErr = {
 
 let errorObj = Object.assign(defaultErr, err);
 console.log("error", errorObj.log);
-  //need to send status
+  res.status(errorObj.status||500).send(errorObj.message);
 })
 
 app.listen(PORT, () => {
