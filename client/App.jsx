@@ -1,8 +1,9 @@
 // 
 import React, { Component } from 'react';
-import Row from './Row';
-import GameList from './GameList';
-import Leaders from './Leaders';
+import Row from './Row.jsx';
+import GameList from './GameList.jsx';
+import Leaders from './Leaders.jsx';
+
 
 
 let gameStore = [];
@@ -94,7 +95,7 @@ class App extends Component {
           {rowElements}
         </div>
         <button id="reset" onClick={() => this.setState(getInitialState())}>Reset board</button>
-        {/* <GameList gameList={gameList} /> */}
+        <GameList gameList={gameList} />
         <Leaders />
       </div>
     );
