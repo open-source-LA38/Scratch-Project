@@ -1,12 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 
-module.exports = {
-<<<<<<< HEAD
+module.exports = {  
   mode: NODE_ENV, 
-=======
-  mode: 'development',
->>>>>>> b264615d53cfbd91a6e5d3e9f3548c071f253c67
   entry: './client/index.js',
   output: {
     filename: 'bundle.js',
