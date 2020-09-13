@@ -2,16 +2,20 @@ import React, { Component } from 'react';
 // import { connect } from 'react-redux';
 
 class InputBox extends Component {
-    constructor(props) {
-        super(props)
-    }
+  constructor(props) {
+    super(props)
+  }
 
   // function making api request
-  sendURL =  async (url) =>  {
+  sendURL = async (url) => {
     // making a request to api
-    try{
+    try {
       //1st action
-      const send =  await fetch(addURLendpoint, {
+<<<<<<< HEAD
+      const send =  await fetch('/main/addURL', {
+=======
+      const send = await fetch(addURLendpoint, {
+>>>>>>> 1a3183ffd2bc3ec0b57b375b60150569cffb71f7
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -21,44 +25,45 @@ class InputBox extends Component {
       })
       //send = response object with the status as property 
       const data = await send.json(); //.then()
-      // data = {status: 200}
+      // alert user of the error
+      // sample response from backend:
+        //data = {status: 200}
       // transform data into the form that we want it 
-      const obj = {
+      const urlObj = {
         url: url,
         status: data.status
       }
       // how do I get this object into state 
       //WE NEED TO DISPATCH 
-      props.dispatch(obj)
-      //props.dispatch = addURL(obj)
+      props.dispatch(urlObj)
+      //props.dispatch = addURL(urlObj)
 
-    } catch (err){
+    } catch (err) {
       console.error(err.messsage)
+      // alert user of the error
     }
+    // we are se nding the endpoint URL in the form of req.body as an object
     
-      // we are se nding the endpoint URL in the form of req.body as an object
   }
 
 
-    render() {
-        return (
-          <div>
-          {/*  will have to update with id class css */}
-            <form onSubmit={ (e) => {
-              sendUrl(e.target.value);
-            }
+  render() {
+    return (
+      <div>
+        {/*  will have to update with id class css */}
+        <form onSubmit={(e) => {
+          sendUrl(e.target.value);
+        }
+        }>
+          <input type="text" placeholder="Enter endpoint here..."></input>
+          {/* remember to fill in onclick based on dispatch method created */}
+          <button type='submit'>Add</button>
 
+        </form>
+      </div>
 
-            }> 
-              <input type="text" placeholder="Enter endpoint here..."></input>
-              {/* remember to fill in onclick based on dispatch method created */}
-              <button type='submit'>Add</button>
-
-            </form>
-          </div>
-            
-        )
-    }
+    )
+  }
 }
 
 export default InputBox;

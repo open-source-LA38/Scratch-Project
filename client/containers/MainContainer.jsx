@@ -10,7 +10,7 @@ const mapStateToProps = (state) => ({});
 
 // dispatch knows to get it to reducer because of connect on line 31
 const mapDispatchToProps = (dispatch) => ({
-  addURL: (obj) => dispatch(addURL(obj)),
+  addURL: (urlObj) => dispatch(addURL(urlObj)),
 });
 
 class MainContainer extends Component {
