@@ -36,6 +36,10 @@ const outputReducer = (state = initialState, action) => {
         status: newStatus,
        }
 
+
+
+       //case check now
+       //iterate through urlList, look for element where urllist[i].url = the url we're looking for, then chance status to most current status, then return modified urllist
   }
 };
 

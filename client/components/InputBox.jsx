@@ -11,7 +11,7 @@ class InputBox extends Component {
     // making a request to api
     try{
       //1st action
-      const send =  await fetch(/main/addURL, {
+      const send =  await fetch('/main/addURL', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',

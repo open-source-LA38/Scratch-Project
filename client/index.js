@@ -14,12 +14,18 @@ import store from './store';
 // uncomment so that webpack can bundle styles
 // import styles from './scss/application.scss';
 
-render((
-<Router>
-  <Switch>
-    <Route path = "/login" component = {Login}/>
-    <Route path = "/signup" component = {Signup}/>
-  </Switch>
-</Router>
-)
-,document.getElementById('root'))
+//https://redux.js.org/advanced/usage-with-react-router
+
+render(
+//   (
+// <Router>
+//   <Switch>
+//     <Route path = "/login" component = {Login}/>
+//     <Route path = "/signup" component = {Signup}/>
+//   </Switch>
+// </Router>
+// )
+<Provider store={store}>
+  <App />
+</Provider>,
+document.getElementById('root'))
