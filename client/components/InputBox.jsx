@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 // import { connect } from 'react-redux';
 
 class InputBox extends Component {
-    constructor(props) {
-        super(props)
-    }
+  constructor(props) {
+    super(props)
+  }
 
   // function making api request
-  sendURL =  async (url) =>  {
+  sendURL = async (url) => {
     // making a request to api
-    try{
+    try {
       //1st action
-      const send =  await fetch(addURLendpoint, {
+      const send = await fetch(addURLendpoint, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -32,33 +32,31 @@ class InputBox extends Component {
       props.dispatch(obj)
       //props.dispatch = addURL(obj)
 
-    } catch (err){
+    } catch (err) {
       console.error(err.messsage)
     }
+    // we are se nding the endpoint URL in the form of req.body as an object
     
-      // we are se nding the endpoint URL in the form of req.body as an object
   }
 
 
-    render() {
-        return (
-          <div>
-          {/*  will have to update with id class css */}
-            <form onSubmit={ (e) => {
-              sendUrl(e.target.value);
-            }
+  render() {
+    return (
+      <div>
+        {/*  will have to update with id class css */}
+        <form onSubmit={(e) => {
+          sendUrl(e.target.value);
+        }
+        }>
+          <input type="text" placeholder="Enter endpoint here..."></input>
+          {/* remember to fill in onclick based on dispatch method created */}
+          <button type='submit'>Add</button>
 
+        </form>
+      </div>
 
-            }> 
-              <input type="text" placeholder="Enter endpoint here..."></input>
-              {/* remember to fill in onclick based on dispatch method created */}
-              <button type='submit'>Add</button>
-
-            </form>
-          </div>
-            
-        )
-    }
+    )
+  }
 }
 
 export default InputBox;

@@ -10,7 +10,7 @@ const Login = () => {
         <div className="flex-item">
           <div className="logincontainer">
             <h1>Welcome!</h1>
-            <form method="POST" action="/api/login">
+            <form method="POST" action="/auth/login">
               <div className="input">
                 <p>Username</p>
                 <div>
