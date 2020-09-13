@@ -34,7 +34,7 @@ req.body = will hold the URL
 res.locals = will hold the "URL status"*/
 //get request
 //checkUrlNow - A- ping URL, B- save status code and time in database - use URL to tell postgres where to store status code and time stamp, C-send to client URL status code in res.locals
-router.get('/checknow', maincontroller.checkUrlNow, (req, res) => {
+router.get('/checkNow', maincontroller.checkUrlNow, (req, res) => {
     res.status(200).send('test')
 });
 
@@ -47,7 +47,7 @@ res.locals = will send back 2 arrays
 A)all the times URL was pinged
 B)all the status codes */
 //getData 5 -query the database for times and status code for url given in req.body, then save to res.locals and send back a res contiaing res.locals
-router.get('/historicaldata', maincontroller.getData, (req, res) => {
+router.get('/historicalData', maincontroller.getData, (req, res) => {
     res.status(200).send('test')
 });
 
