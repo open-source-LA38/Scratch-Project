@@ -1,7 +1,10 @@
 import * as types from '../actions/action';
 
 const initialState = {
-  endpointsList: [],
+  urlList: [{
+    url: 'www.google.com', status: 200},
+  { url: 'www.yahoo.com', status: 400],
+{url: 'www.facebook.com', status: 400},
   newEndpoint: '',
   status: undefined,
   // graphData(maybe time/)
@@ -14,15 +17,25 @@ const outputReducer = (state = initialState, action) => {
   switch (action.type) {
     // case types.enterTypeHere:
   //...initialstate
-  // endpointsList: [{obj1}, {obj2}],
+  // urlList: [{obj1}, {obj2}], 
   // newEndpoint: '',
   // status: undefined,
-  
-  // something action payload 
-  // JOON MAKE SURE YOU DO THIS!!!
+     case types.ADD_URL:
+      // add the new response obj to urlList via payload
+        // obj will contain prop of url and status as seen in InputBox.jsx
+      // update the status prop 
+      const newURLobj = action.payload;
+      const copyUrlList = state.urlList.slice();
+      copyUrlList.push(newURLobj);
 
+      const newStatus = action.payload.status;
 
-  //   // case types.enterTypeHere:
+      return {
+        ...state,
+        urlList: copyUrlList,
+        status: newStatus,
+       }
+
   }
 };
 

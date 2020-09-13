@@ -9,11 +9,15 @@ const mapStateToProps = (state) => ({
 // because your children components cannot access the state in store
   // get the array state property from store
   // newEndpoint: '',
+
+  urlList: state.outputs.urlList,
+  // const url = U
 });
 
 const mapDispatchToProps = (dispatch) => ({
 // componenets can update state values
 // will be used to pass down disptach props to child components
+
 });
 
 class OutputBoxContainer extends Component {
@@ -23,16 +27,25 @@ class OutputBoxContainer extends Component {
 
   render() { 
     // initialize empty array
+    const childrenList = [];
 
     // iterate through the endpointList array
+    for (let i = 0; i < props.urlList.length; i += 1) {
+      const urlObj = props.urlList[i];
+      childrenList.push(
+        <outputBox urlObj={ urlObj } />
+      )
       // push render boxes of div(outputBox) for each element
       // passing in relevant props and dispatch props
     }
+  }
     return (
         // call outputBox component whenever add button in inputBox is clicked
             // state is changed
         // passes down state to outputBox(children)
-
+        <div>
+          {childrenList}
+        </div>
         // utilzing JSX, call array of child component boxes   
     );
   }

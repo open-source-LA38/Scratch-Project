@@ -11,7 +11,7 @@ class InputBox extends Component {
     // making a request to api
     try{
       //1st action
-      const send =  await fetch(addURLendpoint, {
+      const send =  await fetch(/main/addURL, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -21,19 +21,22 @@ class InputBox extends Component {
       })
       //send = response object with the status as property 
       const data = await send.json(); //.then()
-      // data = {status: 200}
+      // alert user of the error
+      // sample response from backend:
+        //data = {status: 200}
       // transform data into the form that we want it 
-      const obj = {
+      const urlObj = {
         url: url,
         status: data.status
       }
       // how do I get this object into state 
       //WE NEED TO DISPATCH 
-      props.dispatch(obj)
-      //props.dispatch = addURL(obj)
+      props.dispatch(urlObj)
+      //props.dispatch = addURL(urlObj)
 
     } catch (err){
       console.error(err.messsage)
+      // alert user of the error
     }
     
       // we are se nding the endpoint URL in the form of req.body as an object
