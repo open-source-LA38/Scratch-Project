@@ -1,8 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
 
-module.exports = {  
-  mode: NODE_ENV, 
+
+module.exports = {
+  mode: NODE_ENV,
   entry: './client/index.js',
   output: {
     filename: 'bundle.js',
@@ -28,10 +29,11 @@ module.exports = {
     ],
   },
   resolve: {
-    // enable importing js jsx files without specifying their extension
+    //enable importing js jsx files without specifying their extension
     extensions: ['.js', '.jsx'],
   },
   devServer: {
+    historyApiFallback: true,
     contentBase: path.resolve(__dirname, './client'),
     port: 8080,
     proxy: {
@@ -39,5 +41,4 @@ module.exports = {
     },
     publicPath: '/build/',
   },
-
 };
