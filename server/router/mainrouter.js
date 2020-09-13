@@ -1,5 +1,7 @@
 const express = require('express');
 const maincontroller = require('../controller/maincontroller');
+const authcontroller = require('../controller/authcontroller');
+const { getMaxListeners } = require('../server');
 const router = express.Router();
 
 
@@ -15,7 +17,7 @@ twillio API for text messages*/
 //storeUrl - store URL in database, store default interval in database
 //pingUrlInterval - A- retrieve URL and interval from database, B-set timer to ping URL, C-send message to twilio if status is not 200, D- save status code and time in database
 //send to client success message so client can render URL component
-router.post('/addURL', maincontroller.storeUrl, maincontroller.pingUrlInterval, (req, res) => {
+router.post('/addURL', maincontroller.saveUrl, maincontroller.pingUrl, maincontroller.addStatus, maincontroller.saveStatus, (req, res) => {
     res.status(200).send("URL successfully added")
 });
 
