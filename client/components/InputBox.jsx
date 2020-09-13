@@ -10,7 +10,7 @@ class InputBox extends Component {
   sendURL = async (url) => {
     // making a request to api
     try {
-      //1st action
+      //1st action.
 
       const send =  await fetch('/main/addURL', {
 
