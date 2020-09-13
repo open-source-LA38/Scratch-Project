@@ -1,7 +1,7 @@
 
 const express = require("express");
 const path = require("path");
-const bodyparser = require('bodyparser');
+const bodyparser = require('body-parser');
 const app = express();
 const PORT = 3000;
 
@@ -17,13 +17,13 @@ const { Router } = require("express");
  */
 app.use(bodyparser.urlencoded({ extended: true}));
 
-
-//server recieves request to /auth/login or /auth/register, redirect to /authrouter
+//handle authentication requests
+//server recieves request to /auth/login or /auth/register, then direct to /authrouter
 app.use('/auth', authrouter);
 
 
-
-//receive request for /main/historicaldata, /main/addURL, /main/interval, /main/checknow, redirect to /mainrouter
+//handle all other requests
+//receive request for /main/historicaldata, /main/addURL, /main/interval, /main/checknow, then direct to /mainrouter
 app.use('/main', mainrouter);
 
 
@@ -45,7 +45,7 @@ const defaultErr = {
 
 let errorObj = Object.assign(defaultErr, err);
 console.log("error", errorObj.log);
-  //need to send status
+  res.status(errorObj.status||500).send(errorObj.message);
 })
 
 app.listen(PORT, () => {
@@ -53,6 +53,4 @@ app.listen(PORT, () => {
   });
 
 module.exports = app;
-
-
 
