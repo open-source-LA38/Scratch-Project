@@ -19,6 +19,7 @@ const outputReducer = (state = initialState, action) => {
   // status: undefined,
   
   // something action payload 
+  // JOON MAKE SURE YOU DO THIS!!!
 
 
   //   // case types.enterTypeHere:
