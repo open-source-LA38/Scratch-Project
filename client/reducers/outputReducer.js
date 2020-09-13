@@ -13,8 +13,15 @@ const outputReducer = (state = initialState, action) => {
   // console.log('made it to the reducer');
   switch (action.type) {
     // case types.enterTypeHere:
+  //...initialstate
+  // endpointsList: [{obj1}, {obj2}],
+  // newEndpoint: '',
+  // status: undefined,
+  
+  // something action payload 
 
-    // case types.enterTypeHere:
+
+  //   // case types.enterTypeHere:
   }
 };
 

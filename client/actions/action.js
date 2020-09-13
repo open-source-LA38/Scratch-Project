@@ -1,7 +1,11 @@
 // example code
-const addCard = (marketId) => ({
-  type: ADD_CARD,
-  payload: marketId,
+
+
+
+
+const addURL = (obj) => ({
+  type: ADD_URL,
+  payload: obj
 });
 
 
@@ -12,7 +16,7 @@ const addCard = (marketId) => ({
 
 // Action type constants
 
-const ADD_CARD = "ADD CARD";
+const ADD_URL = "ADD CARD";
 
 
 
