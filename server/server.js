@@ -4,9 +4,12 @@ const bodyparser = require('body-parser');
 const app = express();
 const PORT = 3000;
 
-/* required routers */
+/*required routers*/
+
 const authrouter = require('./router/authrouter');
 const mainrouter = require('./router/mainrouter');
+
+
 
 /**
  * Automatically parse urlencoded body content from incoming requests and place it
