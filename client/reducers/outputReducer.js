@@ -1,14 +1,16 @@
-import * as types from '../actions/action';
+import * as types from "../actions/action";
 
 const initialState = {
-  urlList: [{
-    url: 'www.google.com', status: 200},
-  { url: 'www.yahoo.com', status: 400],
-{url: 'www.facebook.com', status: 400},
-  newEndpoint: '',
-  status: undefined,
+  urlList: [
+    { username: "Joon", url: "www.google.com", status: 200, url_Id: 75 },
+    { username: "Lucy", url: "www.yahoo.com", status: 400, url_Id: 80 },
+    { username: "Chris", url: "www.coinbase.com", status: 400, url_Id: 81 },
+    { username: "Joon", url: "www.facebook.com", status: 400, url_Id: 90 },
+  ],
+  newEndpoint: "",
+  status: "",
+  currentUser: "Joon",
   // graphData(maybe time/)
-  
 };
 
 const outputReducer = (state = initialState, action) => {
@@ -16,16 +18,16 @@ const outputReducer = (state = initialState, action) => {
   // console.log('made it to the reducer');
   switch (action.type) {
     // case types.enterTypeHere:
-  //...initialstate
-  // urlList: [{obj1}, {obj2}], 
-  // newEndpoint: '',
-  // status: undefined,
-     case types.ADD_URL:
+    //...initialstate
+    // urlList: [{obj1}, {obj2}],
+    // newEndpoint: '',
+    // status: undefined,
+    case types.ADD_URL:
       // add the new response obj to urlList via payload
-        // obj will contain prop of url and status as seen in InputBox.jsx
-      // update the status prop 
+      // obj will contain prop of url and status as seen in InputBox.jsx
+      // update the status prop
       const newURLobj = action.payload;
-      const copyUrlList = state.urlList.slice();
+      let copyUrlList = state.urlList.slice();
       copyUrlList.push(newURLobj);
 
       const newStatus = action.payload.status;
@@ -34,12 +36,28 @@ const outputReducer = (state = initialState, action) => {
         ...state,
         urlList: copyUrlList,
         status: newStatus,
-       }
+      };
 
+    //case check now
+    //iterate through urlList, look for element where urllist[i].url = the url we're looking for, then change status to most current status, then return modified urllist
+    case types.CHECK_NOW:
+      const newStatusObj = action.payload;
 
+      copyUrlList = state.urlList.slice();
 
-       //case check now
-       //iterate through urlList, look for element where urllist[i].url = the url we're looking for, then chance status to most current status, then return modified urllist
+      copyUrlList.forEach(function (item) {
+        if (item.url_Id === newStatusObj.url_Id) {
+          item.status = newStatusObj.status;
+        }
+      });
+
+      return {
+        ...state,
+        urlList: copyUrlList,
+      };
+
+    default:
+      return state;
   }
 };
 
