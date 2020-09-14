@@ -17,10 +17,10 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
+            presets: ['@babel/preset-env', '@babel/preset-react']
           },
         },
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       {
         test: /\.css$/,
@@ -29,7 +29,6 @@ module.exports = {
     ],
   },
   resolve: {
-    //enable importing js jsx files without specifying their extension
     extensions: ['.js', '.jsx'],
   },
   devServer: {

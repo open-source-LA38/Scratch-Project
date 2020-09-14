@@ -4,6 +4,7 @@ const maincontroller = {};
 const db = require("../db/databaseIndex.js");
 
 
+
 /*REQUEST/RESPONSE MIDDLEWARE*/
 
 //storeUrl - store URL in database, store default interval in database
