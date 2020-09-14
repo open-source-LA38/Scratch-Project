@@ -12,7 +12,10 @@ const mapStateToProps = (state) => ({
   // newEndpoint: '',
 
   urlList: state.outputs.urlList,
-  currentUser: state.outputs.currentUser,
+  // currentUser: state.outputs.currentUser,
+  // status: state.outputs.status,
+  url_id: state.outputs.currentUser,
+
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -35,10 +38,9 @@ class OutputBoxContainer extends Component {
     // iterate through the endpointList array
     // for (let i = 0; i < props.urlList.length; i += 1) {
     //   if (this.props.urlList[i].username === props.currentUser) {
-    const urlObj = this.props.urlList[0];
-    //     childrenList.push(
+    // const urlObj = this.props.urlList[0];
 
-    <OutputBox urlObj={urlObj} dispatchCheckStatus={this.props.checkStatus} />;
+    //     childrenList.push(
 
     //     );
     // push render boxes of div(outputBox) for each element
@@ -53,7 +55,13 @@ class OutputBoxContainer extends Component {
       <div>
         success from outputbox container
         {/* {childrenList} */}
-        <OutputBox />
+        <OutputBox
+          // url_id={this.props.urlList[0].url_id}
+          // dispatchCheckStatus={this.props.checkStatus}
+          url_id={this.props.url_id}
+          // status={this.props.status}
+        />
+        ;
       </div>
 
       // utilzing JSX, call array of child component boxes

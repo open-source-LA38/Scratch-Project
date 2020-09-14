@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import OutputBoxContainer from "./OutBoxContainer.jsx";
+import OutputBoxContainer from "./OutputBoxContainer.jsx";
 import InputBox from "../components/InputBox.jsx";
 
 // provide pertinent state here - making a props object to send to react components

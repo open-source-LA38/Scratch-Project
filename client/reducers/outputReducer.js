@@ -9,7 +9,7 @@ const initialState = {
   ],
   newEndpoint: "",
   status: "",
-  currentUser: "Joon",
+  currentUser: "Joon the goon",
   // graphData(maybe time/)
 };
 
