@@ -35,7 +35,7 @@ router.post('/addURL',
  (req, res) => {
   console.log('mainrouter.js /addURL')
     // res.status(200).json({status: res.locals.status});
-    res.status(200).send('mainrouter js addurl success')
+    res.status(200).send(res.locals)
 });
 
 

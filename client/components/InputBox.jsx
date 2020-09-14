@@ -22,7 +22,7 @@ class InputBox extends Component {
     console.log(input);
     console.log('hello');
 
-    const { url } = this.state // ""
+    const { url } = this.state 
     axios.post('http://localhost:3000/main/addURL', url)
     .then((result)=>{
       console.log('inputbox addURL', result);
@@ -31,7 +31,7 @@ class InputBox extends Component {
       console.log('err onsubform', err)
     )
     //e.target[0].value has the URL
-    console.log('inputbox.jsx e', e.target[0].value)
+    // console.log('inputbox.jsx e', e.target[0].value)
   }
   
 // fetch('http://localhost:3000/main/addURL')
