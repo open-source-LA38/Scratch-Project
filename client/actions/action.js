@@ -8,6 +8,11 @@ export const addURL = (urlObj) => ({
   payload: urlObj,
 });
 
+export const checkNow = (statusObj) => ({
+  type: CHECK_NOW,
+  payload: statusObj,
+})
+
 
 
 
@@ -17,6 +22,7 @@ export const addURL = (urlObj) => ({
 // Action type constants
 
 export const ADD_URL = "ADD CARD";
+export const CHECK_NOW ="CHECK_NOW";
 
 
 

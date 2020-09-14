@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 class InputBox extends Component {
   constructor(props) {
@@ -7,11 +7,10 @@ class InputBox extends Component {
   }
 
   // function making api request
-  sendURL = async (url) => {
+ sendURL () {
+   async (url)=> {
     // making a request to api
     try {
-      //1st action
-
       const send =  await fetch('/main/addURL', {
 
         method: 'POST',
@@ -21,29 +20,23 @@ class InputBox extends Component {
         },
         body: JSON.stringify(url),
       })
-      //send = response object with the status as property 
-      const data = await send.json(); //.then()
-      // alert user of the error
-      // sample response from backend:
-        //data = {status: 200}
-      // transform data into the form that we want it 
+      const data = await send.json();
+      
+      // transform the data into the form we want by declaring an object constant
       const urlObj = {
         url: url,
-        status: data.status
+        status: data.status,
+        url_Id: data.url_Id
       }
-      // how do I get this object into state 
-      //WE NEED TO DISPATCH 
-      props.dispatch(urlObj)
-      //props.dispatch = addURL(urlObj)
-
+      
+      // call dispatch method on urlObj - props.dispatchAddUrl = addURL(urlObj) from MainContainer return statement
+      props.dispatchAddUrl(urlObj);
+      
     } catch (err) {
-      console.error(err.messsage)
-      // alert user of the error
+      console.error(err.messsage);
     }
-    // we are se nding the endpoint URL in the form of req.body as an object
-    
   }
-
+}
 
   render() {
     return (
