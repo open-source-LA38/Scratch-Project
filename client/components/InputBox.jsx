@@ -1,95 +1,63 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {postToDo} from '../actions/action.js' 
+import { AddURL } from '../actions/action.js'; 
+import axios from 'axios';
+
 // import '@babel/plugin-proposal-class-properties' from '../../webpack.config.js';
 
 class InputBox extends Component {
   constructor(props) {
     super(props)
-    // this.onSubmitForm = this.onSubmitForm.bind(this);
+    this.onSubForm = this.onSubForm.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.state = {
+      url: '',
+    }
   }
 
-  // function making api request
+  onSubForm (e) {
+    // preventDefault prevents reloading of the page when clicked
+    e.preventDefault();
+    const input = document.getElementById("addUrlForm");
+    console.log(input);
+    console.log('hello');
 
-  // sendURL (url) {
-  //   //triggered by onsubmit
-  //   fetch('http://localhost:3000/main/addURL', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(url),
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       const urlObj = {
-  //         url: url,
-  //         status: data.status,
-  //         url_Id: data.url_Id
-  //       }
-  //     })
-  //     .then(() => this.props.dispatchCheckStatus(urlObj))
-  //     .catch ((err) => {
-  //       console.error(err.messsage);
-  //     })
-  // }
-
-//  sendURL (url) {
-//     // making a request to api
-//     try {
-//       const send =  await fetch('/main/addURL', {
-
-//         method: 'POST',
-//         headers: {
-//           'Accept': 'application/json',
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(url),
-//       })
-//       const data = await send.json();
-      
-//       // transform the data into the form we want by declaring an object constant
-//       const urlObj = {
-//         url: url,
-//         status: data.status,
-//         url_Id: data.url_Id
-//       }
-    
-//       // call dispatch method on urlObj - props.dispatchAddUrl = addURL(urlObj) from MainContainer return statement
-//       props.dispatchAddUrl(urlObj);
-      
-//     } catch (err) {
-//       console.error(err.messsage);
-//     }
+    const { url } = this.state // ""
+    axios.post('http://localhost:3000/main/addURL', url)
+    .then((result)=>{
+      console.log('inputbox addURL', result);
+    })
+    .catch(err=>
+      console.log('err onsubform', err)
+    )
+    //e.target[0].value has the URL
+    console.log('inputbox.jsx e', e.target[0].value)
+  }
+  
+// fetch('http://localhost:3000/main/addURL')
+// .then(res => res.json(url))
+// .then((result)=>{
+//       console.log('inputbox addURL', result);
+//     })
+//     .catch(err=>
+//       console.log('err onsubform', err)
+//     )
+//     //e.target[0].value has the URL
+//     console.log('inputbox.jsx e', e)
 //   }
 
-  onSubForm (e) {
-    e.preventDefault();
-    console.log(e.target[0].value)
-    postToDo(e.target[0].value)
+  onChange(e) {
+    this.setState({ 
+      [e.target.name] : e.target.value
+    })
   }
 
   render() {
    
     return (
       <div>
-        {/*  will have to update with id class css */}
-        <form onSubmit={this.onSubForm}>
-          {/* // (e) => { */}
-          {/* // e.preventDefault(); */}
-          {/* // this.sendUrl(e.target.value)}> */}
-          {/* <input type="text" placeholder="Enter endpoint here..."></input>
-          <button type='submit'>Add</button> */}
-
-        <input
-        type="text"
-        className="form-control"
-      // value={description}
-      //  onChange={handleChange}
-      />
-      <button className="btn btn-success">Add</button>
-        </form>
+          <input id="addUrlForm" type="text" name="url" value={this.state.url} onChange={this.onChange}></input>
+          <button type="submit" onClick={this.onSubForm}>Add url</button>
       </div>
 
     )

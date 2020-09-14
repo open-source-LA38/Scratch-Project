@@ -1,4 +1,5 @@
 
+
 export const ADD_URL = 'ADD CARD';
 export const CHECK_NOW = 'CHECK_NOW';
 
@@ -12,23 +13,26 @@ export const checkNow = (statusObj) => ({
   payload: statusObj,
 });
 
-export const postToDo = (url) => {
-  console.log('I fired');
-  fetch('http://localhost:3000/todos', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(url),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      const urlObj = {
-        url,
-        status: data.status,
-        url_Id: data.url_Id,
-      };
-    })
-    .then(() => this.props.dispatchCheckStatus(statusObj))
-    .catch((err) => {
-      console.error(err.messsage);
-    });
-};
+
+
+// export const AddURL = (url) => {
+//   console.log('action.js postToDo url', url);
+//   fetch('/main/addURL', {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify(url),
+//   })
+//     .then((res) => res.json())
+//     .then((data) => {
+//       console.log('actions js addURL data', data)
+//       // const urlObj = {
+//       //   url: url,
+//       //   status: data.status,
+//       //   url_Id: data.url_Id,
+//       // };
+//     })
+//     .then(() => this.props.dispatchCheckStatus(statusObj))
+//     .catch((err) => {
+//       console.error(err.messsage);
+//     });
+// };

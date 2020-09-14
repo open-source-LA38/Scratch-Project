@@ -6,14 +6,12 @@ const cron = require('node-cron');
 const { startTasks } = require('../controller/maincontroller');
 const router = express.Router();
 
-const router = express.Router();
-
 
 /*Default timer pings all urls in the db every hour*/
 // 1) query all urls from the db  queryAll
 // 2) ping all of them  pingAll
 // 3) save status to db saveStatus
-cron.schedule('* * * * * *',maincontroller.startTasks)
+// cron.schedule('* * * * * *',maincontroller.startTasks)
 
 /* 3) user adds in URL that they want to track
 api= /addURL
@@ -29,11 +27,15 @@ twillio API for text messages */
 // pingUrlInterval - A- retrieve URL and interval from database, B-set timer to ping URL, C-send message to twilio if status is not 200, D- save status code and time in database
 // send to client success message so client can render URL component
 router.post('/addURL',
+
  maincontroller.saveUrl,
- maincontroller.pingUrl,
- maincontroller.addStatus,
+//  maincontroller.pingUrl,
+//  maincontroller.addStatus,
+
  (req, res) => {
-    res.status(200).json({status: res.locals.status});
+  console.log('mainrouter.js /addURL')
+    // res.status(200).json({status: res.locals.status});
+    res.status(200).send('mainrouter js addurl success')
 });
 
 
@@ -58,9 +60,9 @@ time will be req.body */
 // put request (to update interval)
 // updateInterval - update interval in database
 // pingURLInterval - A- retrieve URL and interval from database, B-set timer to ping URL, C-send message to twilio if status is not 200, D- save status code and time in database
-router.put('/interval', maincontroller.updateInterval, maincontroller.pingUrlInterval, (req, res) => {
-  res.status(200).send('Interval successfully changed');
-});
+// router.put('/interval', maincontroller.updateInterval, maincontroller.pingUrlInterval, (req, res) => {
+//   res.status(200).send('Interval successfully changed');
+// });
 
 /* 5) based on user clicking on button in front end, will check current status code
 
@@ -70,7 +72,7 @@ res.locals = will hold the "URL status" */
 // get request
 // checkUrlNow - A- ping URL, B- save status code and time in database - use URL to tell postgres where to store status code and time stamp, C-send to client URL status code in res.locals
 
-router.get('/checkNow', maincontroller.pingUrl,maincontroller.addStatus, (req, res) => {
+router.get('/checkNow', maincontroller.pingUrl, maincontroller.addStatus, (req, res) => {
   res.status(200).json({status: res.locals.status});
 });
 
@@ -87,9 +89,9 @@ router.get('/checkNow', maincontroller.pingUrl,maincontroller.addStatus, (req, r
 /* STRETCH */
 
 
-router.get('/checkNow', maincontroller.checkUrlNow, (req, res) => {
-  res.status(200).send('test');
-});
+// router.get('/checkNow', maincontroller.checkUrlNow, (req, res) => {
+//   res.status(200).send('test');
+// });
 
 
 /* 6) - data pull[https://mdbootstrap.com/docs/react/advanced/charts/](https://mdbootstrap.com/docs/react/advanced/charts/)
@@ -115,6 +117,6 @@ time will be req.body*/
 
 //router.get('/historicalData', maincontroller.getData, (req, res) => {
   //res.status(200).send('test');
-});
+// });
 
 module.exports = router;

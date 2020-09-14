@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyparser = require('body-parser');
-
+const cors = require('cors');
 const app = express();
 const PORT = 3000;
 
@@ -17,6 +17,13 @@ const mainrouter = require('./router/mainrouter');
  * https://www.npmjs.com/package/body-parser
  */
 app.use(bodyparser.urlencoded({ extended: true }));
+
+app.use(cors({
+  origin: [
+    'http://localhost:8080',
+    'http://localhost:3000',
+  ]
+}));
 
 // handle authentication requests
 // server recieves request to /auth/login or /auth/register, then direct to /authrouter

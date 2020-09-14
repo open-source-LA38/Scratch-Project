@@ -9,9 +9,11 @@ const db = require("../db/databaseIndex.js");
 
 //storeUrl - store URL in database, store default interval in database
 maincontroller.saveUrl = (req, res, next) => {
+  console.log('maincontroller saveURL req.body', req.body)
+  return next();
   //receive Url from req.body, interval defaulted to 1 hour
   //let status;
-  let userId = req.body.user_id;//recieved from state
+  /*let userId = req.body.user_id;//recieved from state
   //https://www.postgresql.org/docs/9.0/dml-insert.html
   const updateUrlTable = "INSERT INTO url (user_id,url) VALUES ($1, $2) RETURNING url_id";
   db.query(updateUrlTable, [userId, req.body.url])
@@ -25,7 +27,7 @@ maincontroller.saveUrl = (req, res, next) => {
         status: 400,
         message: { err: error },
       })
-    )
+    )*/
 }
 
 
