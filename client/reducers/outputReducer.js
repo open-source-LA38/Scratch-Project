@@ -1,15 +1,25 @@
-import * as types from "../actions/action";
+
+import * as types from '../constants/actionTypes';
+
 
 const initialState = {
   urlList: [
-    { username: "Joon", url: "www.google.com", status: 200, url_Id: 75 },
-    { username: "Lucy", url: "www.yahoo.com", status: 400, url_Id: 80 },
-    { username: "Chris", url: "www.coinbase.com", status: 400, url_Id: 81 },
-    { username: "Joon", url: "www.facebook.com", status: 400, url_Id: 90 },
+    {
+      username: 'Joon', url: 'https://swapi.dev/api/people/1', status: 200, url_id: 75,
+    },
+    {
+      username: 'Lucy', url: 'www.yahoo.com', status: 400, url_id: 80,
+    },
+    {
+      username: 'Chris', url: 'www.coinbase.com', status: 400, url_id: 81,
+    },
+    {
+      username: 'Joon', url: 'www.facebook.com', status: 400, url_id: 90,
+    },
   ],
-  newEndpoint: "",
-  status: "",
-  currentUser: "Joon the goon",
+  newEndpoint: '',
+  status: '',
+  currentUser: 'Joon the goon',
   // graphData(maybe time/)
 };
 
@@ -18,7 +28,7 @@ const outputReducer = (state = initialState, action) => {
   // console.log('made it to the reducer');
   switch (action.type) {
     // case types.enterTypeHere:
-    //...initialstate
+    // ...initialstate
     // urlList: [{obj1}, {obj2}],
     // newEndpoint: '',
     // status: undefined,
@@ -29,7 +39,7 @@ const outputReducer = (state = initialState, action) => {
       const newURLobj = action.payload;
       let copyUrlList = state.urlList.slice();
       copyUrlList.push(newURLobj);
-
+      
       const newStatus = action.payload.status;
 
       return {
@@ -38,19 +48,21 @@ const outputReducer = (state = initialState, action) => {
         status: newStatus,
       };
 
-    //case check now
-    //iterate through urlList, look for element where urllist[i].url = the url we're looking for, then change status to most current status, then return modified urllist
+    // case check now
+    // iterate through urlList, look for element where urllist[i].url = the url we're looking for,
+    // then change status to most current status, then return modified urllist
     case types.CHECK_NOW:
+      // console.log('we reached the reducer')
       const newStatusObj = action.payload;
-
+      console.log(newStatusObj)
       copyUrlList = state.urlList.slice();
 
-      copyUrlList.forEach(function (item) {
-        if (item.url_Id === newStatusObj.url_Id) {
+      copyUrlList.forEach((item) => {
+        if (item.url_id === newStatusObj.url_id) {
           item.status = newStatusObj.status;
         }
       });
-
+      console.log(copyUrlList)
       return {
         ...state,
         urlList: copyUrlList,
@@ -62,3 +74,4 @@ const outputReducer = (state = initialState, action) => {
 };
 
 export default outputReducer;
+

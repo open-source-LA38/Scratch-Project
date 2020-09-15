@@ -2,13 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import OutputBoxContainer from "./OutputBoxContainer.jsx";
 import InputBox from "../components/InputBox.jsx";
+import * as actions from '../actions/action'
 
 // provide pertinent state here - making a props object to send to react components
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  currentUser: state.outputs.currentUser,
+});
 
 // dispatch knows to get it to reducer because of connect on line 31
 const mapDispatchToProps = (dispatch) => ({
-  addURL: (urlObj) => dispatch(addURL(urlObj)),
+  addURL: (urlObj) => dispatch(actions.addURL(urlObj)),
 });
 
 class MainContainer extends Component {
@@ -20,7 +23,11 @@ class MainContainer extends Component {
     return (
       <div>
         maincontainer
-        <InputBox dispatchAddUrl={this.props.addURL} />
+        <InputBox 
+        dispatchAddUrl={this.props.addURL}
+        currentUser={this.props.currentUser} 
+
+        />
         <OutputBoxContainer />
       </div>
     );
