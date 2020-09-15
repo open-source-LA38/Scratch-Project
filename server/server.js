@@ -1,16 +1,13 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
-
 const app = express();
 const PORT = 3000;
 
 /*required routers*/
-
 const authrouter = require('./router/authrouter');
 const mainrouter = require('./router/mainrouter');
 
-
+/*CORS middleware to prevent CORS policy during POST*/
 app.use(cors());
 
 /**
@@ -18,8 +15,9 @@ app.use(cors());
  * in req.body
  * https://www.npmjs.com/package/body-parser
  */
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 
 // handle authentication requests
 // server recieves request to /auth/login or /auth/register, then direct to /authrouter

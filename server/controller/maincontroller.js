@@ -1,53 +1,27 @@
 /* eslint-disable prefer-destructuring */
 const path = require('path');
 const fs = require('fs');
-const fetch = require('node-fetch');
-
 const maincontroller = {};
 const db = require('../db/databaseIndex.js');
 
+/* Need to import node library if we want to use fetch in the backend */
+const fetch = require('node-fetch');
+
 /* REQUEST/RESPONSE MIDDLEWARE */
 
-//* CSS Gods one
-// storeUrl - store URL in database, store default interval in database
-// maincontroller.saveUrl = (req, res, next) => {
-//   // receive Url from req.body, interval defaulted to 1 hour
-//   // let status;
-//   const userId = req.body.user_id;// recieved from state
-//   // https://www.postgresql.org/docs/9.0/dml-insert.html
-//   const updateUrlTable = 'INSERT INTO url (user_id,url) VALUES ($1, $2) RETURNING url_id';
-//   db.query(updateUrlTable, [userId, req.body.url])
-//     .then((saved) => {
-//       res.locals.urlId = saved.rows.urlId;
-//     })// MAKE SURE url IS LOWERCASE ON FRONTEND REQUEST OBJECT
-//     .catch((error) => next({
-//       log:
-//           'Express error handler caught error in maincontroller.saveURL',
-//       status: 400,
-//       message: { err: error },
-//     }));
-// };
 
-//* Lucy's saveURL
 maincontroller.saveUrl = (req, res, next) => {
-  console.log('maincontroller saveURL req.body', req.body);
   const urlBody = req.body;
   const urlArray = Object.keys(urlBody);
-  // pulled url out of object and then array
   const url = urlArray[0];
   res.locals.url = url;
-  console.log('url', url);
 
-  // receive Url from req.body, interval defaulted to 1 hour
-  // let status;
-  const userId = 42; // req.body.user_id; recieved from state
-  // https://www.postgresql.org/docs/9.0/dml-insert.html
+  const userId = 42; /* ITERATION OPTION: this should pull from state that's updated from DB */
+  
   const updateUrlTable = 'INSERT INTO url (user_id, url) VALUES ($1, $2) RETURNING url_id';
   db.query(updateUrlTable, [userId, `${url}`])
     .then((saved) => {
-      // console.log('saved', saved)
       res.locals.db_url_id = saved.rows[0].url_id;
-      console.log('dburlid', res.locals.db_url_id)
       return next();
     })// MAKE SURE url IS LOWERCASE ON FRONTEND REQUEST OBJECT
     .catch((error) => next({
@@ -56,9 +30,9 @@ maincontroller.saveUrl = (req, res, next) => {
       status: 400,
       message: { err: error },
     }));
-  // return next()
 };
 
+/*Checks to see the status code of the URL we added depending on the response we get back */
 maincontroller.pingUrl = (req, res, next) => {
   let check;
   if (!res.locals.url) check = req.body.url;
@@ -67,10 +41,9 @@ maincontroller.pingUrl = (req, res, next) => {
     .then((data) => data.json())
     .then((response) => {
       console.log(response);
-      if (typeof response === 'object') {
+      if (typeof response === 'object') { 
         res.locals.url_id = req.body.url_id;
-        res.locals.status = '420';
-        console.log(res.locals.status);
+        res.locals.status = '200'; //We assumed that it is status 200 if we receive an object, this could be more specific 
         return next();
       }
       res.locals.status = '400';
@@ -84,24 +57,16 @@ maincontroller.pingUrl = (req, res, next) => {
     }));
 };
 
-// //database will insert timestamp into status table when new statu is inserted
-// const addStatusQuery = "INSERT INTO status (url_id, status) VALUES ()";
-// //fetch- !) ping Url, 2)if ping returns 200 message- we know Url is valid, 3)store Url in database, 4)invoke scheduler, 5)send status code to client (res.locals)
-// //https://blog.logrocket.com/axios-or-fetch-api/#:~:text=To%20send%20data%2C%20fetch(),set%20in%20the%20options%20object
-// //invoke getstatus to ping url, receive status code
-
+/* Adds URL attributes to Postgres, but also sends back status to the client so that we can keep track in state */
 maincontroller.addStatus = (req, res, next) => {
   // console.log('JOOOOOON')
   if (res.locals.db_url_id) res.locals.url_id = res.locals.db_url_id;
   const time = Date.now();
   const urlId = res.locals.url_id;
-  console.log('we are at addStatus', urlId);
   const status = res.locals.status;
-  console.log(status);
   const updateStatusTable = 'INSERT INTO status (url_id,status,time) VALUES ($1, $2, $3)';
 
   db.query(updateStatusTable, [urlId, status, time])
-    // .then((successpls) => successpls.json())
     .then(() => next())// MAKE SURE url IS LOWERCASE ON FRONTEND REQUEST OBJECT
     .catch((error) => next({
       log:
@@ -111,7 +76,7 @@ maincontroller.addStatus = (req, res, next) => {
     }));
 };
 
-/* TASK SCHEDULER MIDDLEWARE */
+/* ITERATION OPTION: TASK SCHEDULER MIDDLEWARE */
 
 maincontroller.startTasks = () => {
   return maincontroller.pingAll('test');
@@ -152,10 +117,7 @@ maincontroller.saveStatus = (updatedUrlArr) => {
   }
 };
 
-/* Twilio express sms docs
-https://www.twilio.com/docs/sms/tutorials/how-to-send-sms-messages-node-js
-*/
-// node-cron/scheduler to schedule tasks
+/*Readme/Resources */
 
 /* Timestamp for psql
 https://www.sqlservertutorial.net/sql-server-date-functions/sql-server-current_time-function/
@@ -176,21 +138,6 @@ res.status of 200 or error
 default interval every hour
 backend timer: [https://nodejs.org/en/docs/guides/timers-in-node/](https://nodejs.org/en/docs/guides/timers-in-node/)
 twillio API for text messages */
-
-// Users Table
-// //username password phonenumber user_id
-//   cam       hi        714722      1
-
-// Send User_ID -> Client -> User_ID into State
-
-// URL Table
-// //URL_ID URL_Link     User_Id
-//     1     google.com    1
-
-// select * from users where username == passedInName AND password = encrypted version of passedInPass
-
-// Register username: cam pw: hello -> 7yxf
-// Saved in DB
 
 // Login
 // cam hello -> 7yxf, bcrypt adds salt register

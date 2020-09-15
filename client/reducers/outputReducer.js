@@ -3,10 +3,8 @@ import * as types from '../constants/actionTypes';
 
 
 const initialState = {
+  /* Dummy Data this would be for pulling from DB */
   urlList: [
-    {
-      username: 'Joon', url: 'https://swapi.dev/api/people/1', status: 200, url_id: 75,
-    },
     {
       username: 'Lucy', url: 'www.yahoo.com', status: 400, url_id: 80,
     },
@@ -19,23 +17,16 @@ const initialState = {
   ],
   newEndpoint: '',
   status: '',
-  currentUser: 'Joon the goon',
+  currentUser: '',
   // graphData(maybe time/)
 };
 
 const outputReducer = (state = initialState, action) => {
-  // ensure we make it to the reducer
-  // console.log('made it to the reducer');
+  
   switch (action.type) {
-    // case types.enterTypeHere:
-    // ...initialstate
-    // urlList: [{obj1}, {obj2}],
-    // newEndpoint: '',
-    // status: undefined,
+
     case types.ADD_URL:
-      // add the new response obj to urlList via payload
-      // obj will contain prop of url and status as seen in InputBox.jsx
-      // update the status prop
+
       const newURLobj = action.payload;
       let copyUrlList = state.urlList.slice();
       copyUrlList.push(newURLobj);
@@ -48,11 +39,9 @@ const outputReducer = (state = initialState, action) => {
         status: newStatus,
       };
 
-    // case check now
-    // iterate through urlList, look for element where urllist[i].url = the url we're looking for,
-    // then change status to most current status, then return modified urllist
+   
     case types.CHECK_NOW:
-      // console.log('we reached the reducer')
+      
       const newStatusObj = action.payload;
       console.log(newStatusObj)
       copyUrlList = state.urlList.slice();

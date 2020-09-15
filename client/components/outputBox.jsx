@@ -8,7 +8,6 @@ class OutputBox extends Component {
   }
 
   checkNow() {
-    //triggered by onsubmit
     return axios
       .post(
         "http://localhost:3000/main/checkNow",
@@ -18,7 +17,6 @@ class OutputBox extends Component {
         }
       )
       .then((status) =>
-        // console.log(this.props.dispatchCheckStatus))
 
         this.props.dispatchCheckStatus({
           status: status.data.status,
@@ -30,21 +28,12 @@ class OutputBox extends Component {
       });
   }
 
-
-  // key={this.props.url_id}
-  // url={this.props.url}
-  // status={this.props.status}
-  // dispatchCheckStatus={this.props.checkStatus}
-
   render() {
     return (
-      <div>
-      {/* <h1>hellllo outputbox</h1> */}
-        <div className="outputBox" url_id={this.props.url_id}>
+      <div id="boxes">
+        <div url_id={this.props.url_id}>
           url: {this.props.url}
           status: {this.props.status} 
-          {/* <h1>{this.props.username}</h1>
-          <h1>{this.props.key}</h1> */}
           <button onClick={this.checkNow}>check now</button>
           <button>uptime</button>
         </div>
